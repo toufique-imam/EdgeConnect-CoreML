@@ -246,11 +246,11 @@ class ViewController: UIViewController {
         let startTime = CFAbsoluteTimeGetCurrent()
 
         // Initialize the EdgeConnect model
-        let model_edge = edge()
-        let model_inpainting = inpainting()
+        let model_edge = try! edge()
+        let model_inpainting = try! inpainting()
 
-        let height = 320
-        let width = 320
+        let height = 256
+        let width = 256
 
         // Next steps are pretty heavy, better process them on another thread
         DispatchQueue.global().async {
@@ -306,14 +306,14 @@ class ViewController: UIViewController {
             self.getMask(pixelBuffer: cvBufferInput, data: mlMask, height: height, width: width)
             //let image = mlMask.image(min: 0, max: 1, axes: (0, 1, 2))
 
-            guard let mlInputEdge = try? MLMultiArray(shape: [3, NSNumber(value: width), NSNumber(value: height)], dataType: MLMultiArrayDataType.float32) else {
+            guard let mlInputEdge = try? MLMultiArray(shape: [1, 3, NSNumber(value: width), NSNumber(value: height)], dataType: MLMultiArrayDataType.float32) else {
                 completion(nil, EdgeConnectError.allocError)
                 return
             }
 
             self.prepareEdgeInput(gray: mlGray, edge: mlEdge, mask: mlMask, input: mlInputEdge, height: height, width: width)
 
-            guard let inputEdge = try? edgeInput(input_1: mlInputEdge) else {
+            guard let inputEdge = try? edgeInput(x_1: mlInputEdge) else {
                 completion(nil, EdgeConnectError.allocError)
                 return
             }
@@ -325,14 +325,14 @@ class ViewController: UIViewController {
             //let image = edgeOutput._153.image(min: 0, max: 1, axes: (0, 1, 2))
 
             // 3 - InPainting model
-            guard let mlInputInpainting = try? MLMultiArray(shape: [4, NSNumber(value: width), NSNumber(value: height)], dataType: MLMultiArrayDataType.float32) else {
+            guard let mlInputInpainting = try? MLMultiArray(shape: [1, 4, NSNumber(value: width), NSNumber(value: height)], dataType: MLMultiArrayDataType.float32) else {
                 completion(nil, EdgeConnectError.allocError)
                 return
             }
 
-            self.prepareInpaintingInput(image: cvBufferInput, mask: mlMask, edge: edgeOutput._153, input: mlInputInpainting, height: height, width: width)
+            self.prepareInpaintingInput(image: cvBufferInput, mask: mlMask, edge: edgeOutput.var_288, input: mlInputInpainting, height: height, width: width)
 
-            guard let inputInpainting = try? inpaintingInput(input_1: mlInputInpainting) else {
+            guard let inputInpainting = try? inpaintingInput(x_1: mlInputInpainting) else {
                 completion(nil, EdgeConnectError.allocError)
                 return
             }
@@ -348,7 +348,7 @@ class ViewController: UIViewController {
                 return
             }
 
-            self.mergeOutputImage(image: cvBufferInput, inpainting: inpaintingOutput._173, mask: mlMask, output: mlOutput, height: height, width: width)
+            self.mergeOutputImage(image: cvBufferInput, inpainting: inpaintingOutput.var_309, mask: mlMask, output: mlOutput, height: height, width: width)
             let image = mlOutput.image(min: 0, max: 1, axes: (0, 1, 2))
 
             // 4 - Hand result to main thread
@@ -382,13 +382,15 @@ class ViewController: UIViewController {
 
         self.isProcessing = true
         self.process(input: image) { filteredImage, error in
-            self.isProcessing = false
-            if let filteredImage = filteredImage {
-                self.imageView.image = filteredImage
-            } else if let error = error {
-                self.showError(error)
-            } else {
-                self.showError(EdgeConnectError.unknown)
+            DispatchQueue.main.async {
+                self.isProcessing = false
+                if let filteredImage = filteredImage {
+                    self.imageView.image = filteredImage
+                } else if let error = error {
+                    self.showError(error)
+                } else {
+                    self.showError(EdgeConnectError.unknown)
+                }
             }
         }
     }

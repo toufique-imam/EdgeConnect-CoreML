@@ -12,8 +12,6 @@
 		3741E7A521FD51AB00C745CE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3741E7A321FD51AB00C745CE /* Main.storyboard */; };
 		3741E7A721FD51AD00C745CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3741E7A621FD51AD00C745CE /* Assets.xcassets */; };
 		3741E7AA21FD51AD00C745CE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3741E7A821FD51AD00C745CE /* LaunchScreen.storyboard */; };
-		3741E7B421FD53F800C745CE /* edge.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 3741E7B221FD53F800C745CE /* edge.mlmodel */; };
-		3741E7B521FD53F800C745CE /* inpainting.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 3741E7B321FD53F800C745CE /* inpainting.mlmodel */; };
 		3741E7B921FDB77E00C745CE /* UIImage+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3741E7B621FDB77E00C745CE /* UIImage+Resize.swift */; };
 		3741E7BA21FDB77E00C745CE /* UIImage+CoreML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3741E7B721FDB77E00C745CE /* UIImage+CoreML.swift */; };
 		3741E7BB21FDB77E00C745CE /* EdgeConnectError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3741E7B821FDB77E00C745CE /* EdgeConnectError.swift */; };
@@ -22,6 +20,8 @@
 		3741E7C521FDF19600C745CE /* CGImage+RawBytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3741E7C321FDF19600C745CE /* CGImage+RawBytes.swift */; };
 		37A8EFE12204964900665138 /* GPUImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37A8EFDB2204963400665138 /* GPUImage.framework */; };
 		37A8EFE322049C5800665138 /* GPUImage.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 37A8EFDB2204963400665138 /* GPUImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BC279B8F2DC2324F0009A8AE /* edge.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = BC279B8D2DC2324F0009A8AE /* edge.mlpackage */; };
+		BC279B902DC2324F0009A8AE /* inpainting.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = BC279B8E2DC2324F0009A8AE /* inpainting.mlpackage */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,8 +83,6 @@
 		3741E7A621FD51AD00C745CE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3741E7A921FD51AD00C745CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3741E7AB21FD51AD00C745CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3741E7B221FD53F800C745CE /* edge.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = edge.mlmodel; sourceTree = "<group>"; };
-		3741E7B321FD53F800C745CE /* inpainting.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = inpainting.mlmodel; sourceTree = "<group>"; };
 		3741E7B621FDB77E00C745CE /* UIImage+Resize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Resize.swift"; sourceTree = "<group>"; };
 		3741E7B721FDB77E00C745CE /* UIImage+CoreML.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+CoreML.swift"; sourceTree = "<group>"; };
 		3741E7B821FDB77E00C745CE /* EdgeConnectError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EdgeConnectError.swift; sourceTree = "<group>"; };
@@ -92,6 +90,8 @@
 		3741E7C221FDF19600C745CE /* MLMultiArray+Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MLMultiArray+Image.swift"; sourceTree = "<group>"; };
 		3741E7C321FDF19600C745CE /* CGImage+RawBytes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGImage+RawBytes.swift"; sourceTree = "<group>"; };
 		37A8EFCF2204963300665138 /* GPUImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GPUImage.xcodeproj; path = "EdgeConnect-CoreML/framework/GPUImage.xcodeproj"; sourceTree = "<group>"; };
+		BC279B8D2DC2324F0009A8AE /* edge.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; path = edge.mlpackage; sourceTree = "<group>"; };
+		BC279B8E2DC2324F0009A8AE /* inpainting.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; path = inpainting.mlpackage; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,8 +147,8 @@
 		3741E7B121FD53C500C745CE /* coreml_models */ = {
 			isa = PBXGroup;
 			children = (
-				3741E7B221FD53F800C745CE /* edge.mlmodel */,
-				3741E7B321FD53F800C745CE /* inpainting.mlmodel */,
+				BC279B8D2DC2324F0009A8AE /* edge.mlpackage */,
+				BC279B8E2DC2324F0009A8AE /* inpainting.mlpackage */,
 			);
 			path = coreml_models;
 			sourceTree = "<group>";
@@ -282,12 +282,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				3741E7C521FDF19600C745CE /* CGImage+RawBytes.swift in Sources */,
+				BC279B8F2DC2324F0009A8AE /* edge.mlpackage in Sources */,
+				BC279B902DC2324F0009A8AE /* inpainting.mlpackage in Sources */,
 				3741E7A221FD51AB00C745CE /* ViewController.swift in Sources */,
 				3741E7A021FD51AB00C745CE /* AppDelegate.swift in Sources */,
-				3741E7B421FD53F800C745CE /* edge.mlmodel in Sources */,
 				3741E7BA21FDB77E00C745CE /* UIImage+CoreML.swift in Sources */,
 				3741E7B921FDB77E00C745CE /* UIImage+Resize.swift in Sources */,
-				3741E7B521FD53F800C745CE /* inpainting.mlmodel in Sources */,
 				3741E7BB21FDB77E00C745CE /* EdgeConnectError.swift in Sources */,
 				3741E7C121FDE50000C745CE /* Math.swift in Sources */,
 				3741E7C421FDF19600C745CE /* MLMultiArray+Image.swift in Sources */,
