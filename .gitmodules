@@ -1,3 +1,4 @@
 [submodule "edge-connect"]
     path = edge-connect
     url = https://github.com/toufique-imam/edge-connect.git
+    branch = master
