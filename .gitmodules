@@ -1,0 +1,3 @@
+[submodule "shared-lib"]
+    path = edge-connect
+    url = https://github.com/toufique-imam/edge-connect.git
